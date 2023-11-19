@@ -1,5 +1,3 @@
-<!-- MyComponent.vue -->
-
 <template>
     <div class="mt-3">
         <label for="stateDropdown">Select State:</label>
@@ -22,23 +20,30 @@
                 <option v-for="year in sortedYears" :key="year">{{ year }}</option>
             </select>
 
-            <div class="mt-5" v-if="filteredData.length > 0">
+            <div class="mt-5" v-if="selectedState && selectedYear">
                 <h2 class="font-bold text-xl">
                     Events in {{ selectedState }}{{ selectedYear ? `, ${selectedYear}` : '' }}
                 </h2>
-                <!-- Display counts for each EF rating -->
-                <div class="flex mt-5">
-                    <div v-for="(count, rating) in efRatingCounts" :key="rating" class="flex w-full justify-evenly">
-                        <div class="p-10 rounded-xl flex justify-center align-center border border-gray-300 shadow">
-                            <div class="text-center">
-                                <h2 class="font-bold text-xl">EF{{ rating }}&apos;s</h2>
-                                <h1 class="font-bold text-3xl">{{ count }}</h1>
+
+                <!-- Display OpenStreetMap map of tornado tracks that is 20% vh in height and full width -->
+                <div class="max-h-[60vh]">
+                    <TornadoMapComponent :selectedState="selectedState" :tornadoTracks="tornadoTracks" />
+                </div>
+
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 z-10 bg-white w-full">
+                    <!-- Display counts for each EF rating -->
+                    <div class="flex pt-5 pb-5 z-10 bg-white">
+                        <div v-for="(count, rating) in efRatingCounts" :key="rating" class="flex w-full justify-evenly">
+                            <div
+                                class="p-10 rounded-xl bg-white flex justify-center align-center border border-gray-300 shadow"
+                            >
+                                <div class="text-center">
+                                    <h2 class="font-bold text-xl">EF{{ rating }}&apos;s</h2>
+                                    <h1 class="font-bold text-3xl">{{ count }}</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -87,6 +92,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import jsonData from '../assets/data.json';
+import TornadoMapComponent from './TornadoMapComponent.vue';
 
 const selectedState = ref('');
 const selectedYear = ref('');
