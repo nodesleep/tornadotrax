@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.16",
     "csvtojson": "^2.0.10",
     "pinia": "^2.1.7",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
     "vue": "^3.3.8"
   },
   "devDependencies": {

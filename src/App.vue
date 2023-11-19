@@ -1,11 +1,11 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue';
+import TorTableComponent from './components/TorTableComponent.vue';
 </script>
 
 <template>
-    <div>
-        <h1>Tornado Visualizer</h1>
+    <div class="p-4">
+        <h1 class="font-bold text-4xl">Tornado Visualizer</h1>
         <p>An archive of every actual US Tornado from 1950-2022</p>
-        <HelloWorld />
+        <TorTableComponent />
     </div>
 </template>
