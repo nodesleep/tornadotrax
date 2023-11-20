@@ -1,5 +1,5 @@
 <template>
-    <div ref="mapContainer" class="h-[65vh] w-full"></div>
+    <div ref="mapContainer" class="h-full w-full"></div>
 </template>
 
 <script setup>

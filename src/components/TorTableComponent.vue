@@ -30,9 +30,9 @@
                     Events in {{ selectedState }}{{ selectedYear ? `, ${selectedYear}` : '' }}
                 </h2>
 
-                <div class="flex">
+                <div class="flex mt-3">
                     <!-- Display OpenStreetMap map of tornado tracks that is 20% vh in height and full width -->
-                    <div class="max-h-[65vh] w-1/2 border border-gray-400 mt-3">
+                    <div class="max-h-[65vh] w-1/2 border border-gray-400">
                         <TornadoMapComponent
                             :selectedState="selectedState"
                             :tornadoTracks="tornadoTracks"
@@ -40,7 +40,7 @@
                         />
                     </div>
 
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-3 ml-3 bg-white w-1/2 max-h-[65vh]">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-3 bg-white w-1/2 max-h-[65vh]">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-900 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 sticky top-0"
