@@ -1,49 +1,45 @@
 <template>
     <div class="mt-3">
-        <label for="stateDropdown">Select State:</label>
-        <select
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem]"
-            id="stateDropdown"
-            v-model="selectedState"
-        >
-            <option v-for="state in sortedStates" :key="state">{{ state }}</option>
-        </select>
+        <div class="flex">
+            <div>
+                <label for="stateDropdown">Select State:</label>
+                <select
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem]"
+                    id="stateDropdown"
+                    v-model="selectedState"
+                >
+                    <option v-for="state in sortedStates" :key="state">{{ state }}</option>
+                </select>
+            </div>
+            <div v-if="selectedState" class="ml-10">
+                <label for="yearDropdown">Select Year:</label>
+                <select
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem]"
+                    id="yearDropdown"
+                    v-model="selectedYear"
+                >
+                    <option v-for="year in sortedYears" :key="year">{{ year }}</option>
+                </select>
+            </div>
+        </div>
 
         <!-- Display year dropdown and table only if a state is selected -->
         <div class="mt-2" v-if="selectedState">
-            <label for="yearDropdown">Select Year:</label>
-            <select
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem]"
-                id="yearDropdown"
-                v-model="selectedYear"
-            >
-                <option v-for="year in sortedYears" :key="year">{{ year }}</option>
-            </select>
-
             <div class="mt-5" v-if="selectedState && selectedYear">
                 <h2 class="font-bold text-xl">
                     Events in {{ selectedState }}{{ selectedYear ? `, ${selectedYear}` : '' }}
                 </h2>
 
                 <!-- Display OpenStreetMap map of tornado tracks that is 20% vh in height and full width -->
-                <div class="max-h-[60vh]">
-                    <TornadoMapComponent :selectedState="selectedState" :tornadoTracks="tornadoTracks" />
+                <div class="max-h-[65vh] w-[40vw] border border-gray-400 mt-3">
+                    <TornadoMapComponent
+                        :selectedState="selectedState"
+                        :tornadoTracks="tornadoTracks"
+                        :key="selectedState + selectedYear"
+                    />
                 </div>
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 z-10 bg-white w-full">
-                    <!-- Display counts for each EF rating -->
-                    <div class="flex pt-5 pb-5 z-10 bg-white">
-                        <div v-for="(count, rating) in efRatingCounts" :key="rating" class="flex w-full justify-evenly">
-                            <div
-                                class="p-10 rounded-xl bg-white flex justify-center align-center border border-gray-300 shadow"
-                            >
-                                <div class="text-center">
-                                    <h2 class="font-bold text-xl">EF{{ rating }}&apos;s</h2>
-                                    <h1 class="font-bold text-3xl">{{ count }}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -57,7 +53,6 @@
                                 <th scope="col" class="px-6 py-3">Rating (F/EF-9 = Unknown)</th>
                                 <th scope="col" class="px-6 py-3">Injuries</th>
                                 <th scope="col" class="px-6 py-3">Fatalities</th>
-                                <!-- Add more headers as needed -->
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +86,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import jsonData from '../assets/data.json';
+import jsonData from '../data/data.json';
 import TornadoMapComponent from './TornadoMapComponent.vue';
 
 const selectedState = ref('');
@@ -147,5 +142,24 @@ const efRatingCounts = computed(() => {
     });
 
     return counts;
+});
+
+// Define a computed property to extract tornadoTracks based on selected state and year
+const tornadoTracks = computed(() => {
+    if (!selectedState.value || !selectedYear.value) {
+        return [];
+    }
+
+    return sortedData.value
+        .filter((event) => event.slat && event.slon && event.elat && event.elon && event.mag)
+        .map((event) => {
+            return {
+                slat: parseFloat(event.slat),
+                slon: parseFloat(event.slon),
+                elat: parseFloat(event.elat),
+                elon: parseFloat(event.elon),
+                mag: parseFloat(event.mag),
+            };
+        });
 });
 </script>
