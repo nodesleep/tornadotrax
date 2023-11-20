@@ -1,5 +1,5 @@
 <template>
-    <div ref="mapContainer" class="h-[60vh] w-[40vw]"></div>
+    <div ref="mapContainer" class="h-[65vh] w-full"></div>
 </template>
 
 <script setup>
@@ -29,8 +29,9 @@ const initializeMap = () => {
         const map = L.map(mapContainer.value).setView(getStateCenter(selectedState), 7);
 
         // Add OpenStreetMap tile layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors',
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }).addTo(map);
 
         // Render tornado tracks on the map
@@ -43,6 +44,8 @@ const initializeMap = () => {
 };
 
 const renderTornadoTracks = (map, tracks) => {
+    const tracksLayer = L.layerGroup().addTo(map);
+
     tracks.forEach((track) => {
         const startLatLon = [track.slat, track.slon];
         const endLatLon = [track.elat, track.elon];
@@ -53,7 +56,28 @@ const renderTornadoTracks = (map, tracks) => {
         // Add a polyline to represent the tornado track
         const polyline = L.polyline([startLatLon, endLatLon], {
             color,
-        }).addTo(map);
+        });
+
+        // Create a popup for the polyline
+        const popupContent = `
+            <div>
+                <strong>Tornado #${track.om}</strong><br>
+                Rating: EF${track.mag}<br>
+                Date: ${track.date} at ${track.time}<br>
+                Fatalities: ${track.fat}<br>
+                Injuries: ${track.inj}<br>
+                Distance: ${track.len} mi.<br>
+                Max Width: ${track.wid} yds.
+            </div>
+        `;
+
+        // Add the popup to the polyline
+        polyline.bindPopup(popupContent, {
+            closeButton: true, // You can set this to true if you want a close button
+        });
+
+        // Add polyline to the layer group
+        tracksLayer.addLayer(polyline);
     });
 };
 

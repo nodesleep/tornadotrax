@@ -30,50 +30,52 @@
                     Events in {{ selectedState }}{{ selectedYear ? `, ${selectedYear}` : '' }}
                 </h2>
 
-                <!-- Display OpenStreetMap map of tornado tracks that is 20% vh in height and full width -->
-                <div class="max-h-[65vh] w-[40vw] border border-gray-400 mt-3">
-                    <TornadoMapComponent
-                        :selectedState="selectedState"
-                        :tornadoTracks="tornadoTracks"
-                        :key="selectedState + selectedYear"
-                    />
-                </div>
+                <div class="flex">
+                    <!-- Display OpenStreetMap map of tornado tracks that is 20% vh in height and full width -->
+                    <div class="max-h-[65vh] w-1/2 border border-gray-400 mt-3">
+                        <TornadoMapComponent
+                            :selectedState="selectedState"
+                            :tornadoTracks="tornadoTracks"
+                            :key="selectedState + selectedYear"
+                        />
+                    </div>
 
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 z-10 bg-white w-full">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">Tor #</th>
-                                <th scope="col" class="px-6 py-3">Date</th>
-                                <th scope="col" class="px-6 py-3">Time</th>
-                                <th scope="col" class="px-6 py-3">Start Lat/Lon</th>
-                                <th scope="col" class="px-6 py-3">End Lat/Lon</th>
-                                <th scope="col" class="px-6 py-3">Track Length (mi)</th>
-                                <th scope="col" class="px-6 py-3">Width (yds)</th>
-                                <th scope="col" class="px-6 py-3">Rating (F/EF-9 = Unknown)</th>
-                                <th scope="col" class="px-6 py-3">Injuries</th>
-                                <th scope="col" class="px-6 py-3">Fatalities</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(event, index) in sortedData"
-                                :key="index"
-                                class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 hover:bg-gray-400 hover:text-white"
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-3 ml-3 bg-white w-1/2 max-h-[65vh]">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="text-xs text-gray-900 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 sticky top-0"
                             >
-                                <td class="px-6 py-4">{{ event.om }}</td>
-                                <td class="px-6 py-4">{{ event.date }}</td>
-                                <td class="px-6 py-4">{{ event.time }}</td>
-                                <td class="px-6 py-4">{{ event.slat }}/{{ event.slon }}</td>
-                                <td class="px-6 py-4">{{ event.elat }}/{{ event.elon }}</td>
-                                <td class="px-6 py-4">{{ event.len }}</td>
-                                <td class="px-6 py-4">{{ event.wid }}</td>
-                                <td class="px-6 py-4">F/EF{{ event.mag }}</td>
-                                <td class="px-6 py-4">{{ event.inj }}</td>
-                                <td class="px-6 py-4">{{ event.fat }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Tor #</th>
+                                    <th scope="col" class="px-6 py-3">Date</th>
+                                    <th scope="col" class="px-6 py-3">Time</th>
+                                    <th scope="col" class="px-6 py-3">Track Length (mi)</th>
+                                    <th scope="col" class="px-6 py-3">Width (yds)</th>
+                                    <th scope="col" class="px-6 py-3">Rating (F/EF-9 = Unknown)</th>
+                                    <th scope="col" class="px-6 py-3">Injuries</th>
+                                    <th scope="col" class="px-6 py-3">Fatalities</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(event, index) in sortedData"
+                                    :key="index"
+                                    :class="getBackgroundColorClass(event.mag)"
+                                    class="border-b dark:border-gray-700 hover:bg-gray-500 hover:text-gray-50"
+                                    @click="showPopup(index)"
+                                >
+                                    <td class="px-6 py-4">{{ event.om }}</td>
+                                    <td class="px-6 py-4">{{ event.date }}</td>
+                                    <td class="px-6 py-4">{{ event.time }}</td>
+                                    <td class="px-6 py-4">{{ event.len }}</td>
+                                    <td class="px-6 py-4">{{ event.wid }}</td>
+                                    <td class="px-6 py-4">F/EF{{ event.mag }}</td>
+                                    <td class="px-6 py-4">{{ event.inj }}</td>
+                                    <td class="px-6 py-4">{{ event.fat }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -154,12 +156,31 @@ const tornadoTracks = computed(() => {
         .filter((event) => event.slat && event.slon && event.elat && event.elon && event.mag)
         .map((event) => {
             return {
-                slat: parseFloat(event.slat),
-                slon: parseFloat(event.slon),
-                elat: parseFloat(event.elat),
-                elon: parseFloat(event.elon),
+                slat: event.slat,
+                slon: event.slon,
+                elat: event.elat,
+                elon: event.elon,
                 mag: parseFloat(event.mag),
+                fat: parseFloat(event.fat),
+                inj: parseFloat(event.inj),
+                len: parseFloat(event.len),
+                wid: parseFloat(event.wid),
+                date: event.date,
+                time: event.time,
+                om: event.om,
             };
         });
 });
+
+const getBackgroundColorClass = (mag) => {
+    if (mag >= 3 && mag < 4) {
+        return 'bg-amber-400 text-black font-bold';
+    } else if (mag >= 4 && mag < 5) {
+        return 'bg-red-400 text-black font-bold';
+    } else if (mag >= 5) {
+        return 'bg-purple-400 text-black font-bold';
+    } else {
+        return ''; // Default background color class or an empty string if no match
+    }
+};
 </script>
