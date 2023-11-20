@@ -30,52 +30,21 @@
                     Events in {{ selectedState }}{{ selectedYear ? `, ${selectedYear}` : '' }}
                 </h2>
 
-                <div class="flex mt-3">
+                <div class="mt-3">
                     <!-- Display OpenStreetMap map of tornado tracks that is 20% vh in height and full width -->
-                    <div class="max-h-[65vh] w-1/2 border border-gray-400">
+                    <div class="h-[50vh] w-full border border-gray-400">
                         <TornadoMapComponent
                             :selectedState="selectedState"
                             :tornadoTracks="tornadoTracks"
                             :key="selectedState + selectedYear"
                         />
                     </div>
-
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-3 bg-white w-1/2 max-h-[65vh]">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead
-                                class="text-xs text-gray-900 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400 sticky top-0"
-                            >
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Tor #</th>
-                                    <th scope="col" class="px-6 py-3">Date</th>
-                                    <th scope="col" class="px-6 py-3">Time</th>
-                                    <th scope="col" class="px-6 py-3">Track Length (mi)</th>
-                                    <th scope="col" class="px-6 py-3">Width (yds)</th>
-                                    <th scope="col" class="px-6 py-3">Rating (F/EF-9 = Unknown)</th>
-                                    <th scope="col" class="px-6 py-3">Injuries</th>
-                                    <th scope="col" class="px-6 py-3">Fatalities</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="(event, index) in sortedData"
-                                    :key="index"
-                                    :class="getBackgroundColorClass(event.mag)"
-                                    class="border-b dark:border-gray-700 hover:bg-gray-500 hover:text-gray-50"
-                                    @click="showPopup(index)"
-                                >
-                                    <td class="px-6 py-4">{{ event.om }}</td>
-                                    <td class="px-6 py-4">{{ event.date }}</td>
-                                    <td class="px-6 py-4">{{ event.time }}</td>
-                                    <td class="px-6 py-4">{{ event.len }}</td>
-                                    <td class="px-6 py-4">{{ event.wid }}</td>
-                                    <td class="px-6 py-4">F/EF{{ event.mag }}</td>
-                                    <td class="px-6 py-4">{{ event.inj }}</td>
-                                    <td class="px-6 py-4">{{ event.fat }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+                <div class="mt-3">
+                    <!-- <div class="h-[20vh] w-full border border-gray-400"> -->
+                        <!-- Display Tornado Chart Component -->
+                        <!-- <TorChartComponent :efRatingCounts="efRatingCounts" :key="selectedYear + selectedState" /> -->
+                    <!-- </div> -->
                 </div>
             </div>
 
@@ -90,6 +59,7 @@
 import { ref, computed } from 'vue';
 import jsonData from '../data/data.json';
 import TornadoMapComponent from './TornadoMapComponent.vue';
+import TorChartComponent from './TorChartComponent.vue';
 
 const selectedState = ref('');
 const selectedYear = ref('');
