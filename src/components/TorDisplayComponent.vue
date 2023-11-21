@@ -1,20 +1,20 @@
 <template>
-    <div class="mt-3">
+    <div class="mt-3 w-full">
         <div class="flex">
             <div>
                 <label for="stateDropdown">Select State:</label>
                 <select
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem]"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem] text-center"
                     id="stateDropdown"
                     v-model="selectedState"
                 >
                     <option v-for="state in sortedStates" :key="state">{{ state }}</option>
                 </select>
             </div>
-            <div v-if="selectedState" class="ml-10">
+            <div v-if="selectedState" class="ml-5">
                 <label for="yearDropdown">Select Year:</label>
                 <select
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem]"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-[10rem] text-center"
                     id="yearDropdown"
                     v-model="selectedYear"
                 >
@@ -27,12 +27,12 @@
         <div class="mt-2" v-if="selectedState">
             <div class="mt-5" v-if="selectedState && selectedYear">
                 <h2 class="font-bold text-xl">
-                    Events in {{ selectedState }}{{ selectedYear ? `, ${selectedYear}` : '' }}
+                    Tornadoes in {{ selectedState }}{{ selectedYear ? `, ${selectedYear}` : '' }}
                 </h2>
 
                 <div class="mt-3">
                     <!-- Display OpenStreetMap map of tornado tracks that is 20% vh in height and full width -->
-                    <div class="h-[50vh] w-full border border-gray-400">
+                    <div class="h-[80vh] w-full border border-gray-400">
                         <TornadoMapComponent
                             :selectedState="selectedState"
                             :tornadoTracks="tornadoTracks"
@@ -42,8 +42,8 @@
                 </div>
                 <div class="mt-3">
                     <!-- <div class="h-[20vh] w-full border border-gray-400"> -->
-                        <!-- Display Tornado Chart Component -->
-                        <!-- <TorChartComponent :efRatingCounts="efRatingCounts" :key="selectedYear + selectedState" /> -->
+                    <!-- Display Tornado Chart Component -->
+                    <!-- <TorChartComponent :efRatingCounts="efRatingCounts" :key="selectedYear + selectedState" /> -->
                     <!-- </div> -->
                 </div>
             </div>
@@ -123,7 +123,14 @@ const tornadoTracks = computed(() => {
     }
 
     return sortedData.value
-        .filter((event) => event.slat && event.slon && event.elat && event.elon && event.mag)
+        .filter(
+            (event) =>
+                event.slat &&
+                event.slon &&
+                event.elat !== '0.0' && // Add this condition to exclude elat = 0.0
+                event.elon !== '0.0' && // Add this condition to exclude elon = 0.0
+                event.mag,
+        )
         .map((event) => {
             return {
                 slat: event.slat,
@@ -141,16 +148,4 @@ const tornadoTracks = computed(() => {
             };
         });
 });
-
-const getBackgroundColorClass = (mag) => {
-    if (mag >= 3 && mag < 4) {
-        return 'bg-amber-400 text-black font-bold';
-    } else if (mag >= 4 && mag < 5) {
-        return 'bg-red-400 text-black font-bold';
-    } else if (mag >= 5) {
-        return 'bg-purple-400 text-black font-bold';
-    } else {
-        return ''; // Default background color class or an empty string if no match
-    }
-};
 </script>

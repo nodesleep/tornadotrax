@@ -29,7 +29,7 @@ const initializeMap = () => {
         const map = L.map(mapContainer.value).setView(getStateCenter(selectedState), 7);
 
         // Add OpenStreetMap tile layer
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution:
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }).addTo(map);
@@ -56,6 +56,8 @@ const renderTornadoTracks = (map, tracks) => {
         // Add a polyline to represent the tornado track
         const polyline = L.polyline([startLatLon, endLatLon], {
             color,
+            weight: 4,
+            smoothFactor: 4,
         });
 
         // Create a popup for the polyline
@@ -85,12 +87,12 @@ const renderTornadoTracks = (map, tracks) => {
 const getMagnitudeColor = (magnitude) => {
     // Use a color gradient from cool to warm based on magnitude
     const colorGradient = [
-        '#4CAF50', // Green
-        '#FFC107', // Amber
-        '#FF9800', // Orange
-        '#FF5722', // Deep Orange
-        '#E91E63', // Pink
-        '#9C27B0', // Purple
+        '#A0A0A0', // EF0
+        '#00BCD4', // EF1
+        '#FFEB3B', // EF2
+        '#FF5722', // EF3
+        '#FF0000', // EF4
+        '#FF4081', // EF5
     ];
 
     // Map magnitude (0 to 5) to index in color gradient array
