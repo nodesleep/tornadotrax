@@ -53,7 +53,7 @@ To run TornadoTrax locally, follow these steps:
     npm run serve
     ```
 
-5. Open your browser and go to [http://localhost:8080](http://localhost:8080) to view TornadoTrax.
+5. Open your browser and go to [http://localhost:5173](http://localhost:5173) to view TornadoTrax.
 
 ## Contribution Guidelines
 
