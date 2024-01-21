@@ -17,7 +17,6 @@ A live version can be viewed [here](https://tornadovisualizer.vercel.app/)
 -   **Vue.js:** The frontend is built using Vue.js, a progressive JavaScript framework.
 -   **Leaflet:** The Leaflet library is used for creating interactive maps.
 -   **JSON Data:** Tornado data is sourced from a JSON file included in the project.
--   **Responsive Design:** The application is designed to be responsive, providing a tailored experience for both desktop and mobile users.
 
 ## Project Structure
 
