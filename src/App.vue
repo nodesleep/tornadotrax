@@ -1,8 +1,8 @@
 <template>
-    <main class="content">
+    <main class="content" :class="{ light: isLightMode }">
         <section class="if-mobile">
             <div>
-                <v-icon name="gi-tornado" scale="4" fill="#6366f1" />
+                <v-icon name="gi-tornado" scale="4" fill="#0ea5e9" />
                 <p>
                     It would appear you're trying to access TornadoTrax from a mobile device. While the concept of
                     "mobile first" is industry standard, this application is suited only for desktop users. Sorry about
@@ -13,10 +13,10 @@
         <section class="content-grid">
             <section class="sidebar">
                 <div class="site-title">
-                    <v-icon name="gi-tornado" scale="2" fill="#6366f1" />
+                    <v-icon name="gi-tornado" scale="2" fill="#0ea5e9" />
                     <h2>TornadoTrax</h2>
                 </div>
-                <p>An visual archive and path of every actual US Tornado from 1950-2022</p>
+                <p>An visual archive and path of every US Tornado from 1950-2022*</p>
                 <div class="select-area">
                     <label for="stateDropdown">Select State:</label>
                     <select class="light-select" id="stateDropdown" v-model="selectedState">
@@ -31,15 +31,28 @@
                         <option v-for="year in sortedYears" :key="year">{{ year }}</option>
                     </select>
                 </div>
-                <p class="note">
-                    <strong>Note:</strong> Some tornadoes do not have an end latitude or longitude and therefore have
-                    been omitted. Tornadoes with an unknown rating are also omitted.
-                </p>
-                <div class="legend">
-                    <div v-for="(count, rating) in efRatingCounts" :key="rating" class="legend-item">
-                        <div class="legend-color" :style="{ background: getMagnitudeColor(Number(rating)) }"></div>
-                        <div class="legend-label">EF{{ rating }}</div>
+                <div class="options">
+                    <div class="legend">
+                        <div v-for="(count, rating) in efRatingCounts" :key="rating" class="legend-item">
+                            <div class="legend-color" :style="{ background: getMagnitudeColor(Number(rating)) }"></div>
+                            <div class="legend-label">EF{{ rating }}</div>
+                        </div>
                     </div>
+                    <p class="note">
+                        <strong>*Disclaimer:</strong> Some tornado records do not have an end coordinate and therefore
+                        have been omitted. Tornadoes with an unknown rating are also omitted. These outliers don&apos;t
+                        render correctly in the map.
+                    </p>
+                    <p class="note">
+                        TornadoTrax is an open source project under the GPL-3.0 license.
+                        <a href="https://github.com/themattbook/tornadotrax" target="_blank">View it on Github</a>
+                    </p>
+                    <ul>
+                        <li @click="toggleDarkMode">
+                            <v-icon name="ri-sun-fill" scale="1" v-if="!isLightMode" />
+                            <v-icon name="ri-moon-fill" scale="1" v-if="isLightMode" />
+                        </li>
+                    </ul>
                 </div>
             </section>
             <section class="tornado-map-area">
@@ -47,7 +60,8 @@
                 <TornadoMapComponent
                     :selectedState="selectedState"
                     :tornadoTracks="tornadoTracks"
-                    :key="selectedState + selectedYear"
+                    :key="selectedState + selectedYear + isLightMode"
+                    :isLightMode="isLightMode"
                     v-if="mapReady"
                 />
             </section>
@@ -58,6 +72,9 @@
 import { ref, computed } from 'vue';
 import jsonData from './data/data.json';
 import TornadoMapComponent from './components/TornadoMapComponent.vue';
+
+// Dark Mode/Light Mode Reactive Boolean
+const isLightMode = ref(false);
 
 const mapReady = ref(false);
 const selectedState = ref('');
@@ -166,4 +183,9 @@ const tornadoTracks = computed(() => {
             };
         });
 });
+
+// Toggle for Dark Mode/Light Mode
+const toggleDarkMode = () => {
+    isLightMode.value = !isLightMode.value;
+};
 </script>

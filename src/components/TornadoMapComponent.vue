@@ -3,11 +3,11 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import states from '../data/states.json';
 import L from 'leaflet';
 
-const { selectedState, tornadoTracks } = defineProps(['selectedState', 'tornadoTracks']);
+const { selectedState, tornadoTracks, isLightMode } = defineProps(['selectedState', 'tornadoTracks', 'isLightMode']);
 
 const mapContainer = ref(null);
 
@@ -22,8 +22,13 @@ const initializeMap = () => {
         // Initialize Leaflet map
         const map = L.map(mapContainer.value).setView(getStateCenter(selectedState), 7);
 
+        // Determine which Tile layer to use
+        const tileLayerUrl = isLightMode
+            ? 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
+            : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+
         // Add OpenStreetMap tile layer
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        L.tileLayer(tileLayerUrl, {
             attribution:
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }).addTo(map);

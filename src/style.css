@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+:root {
+    --background-color-dark: #111827;
+    --accent-color-dark: #1e293b;
+    --color-dark: #fff;
+
+    --background-color: #f8fafc;
+    --accent-color: #e2e8f0;
+    --color: #020617;
+}
+
 *,
 *::before,
 *::after {
@@ -8,11 +18,9 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     font-size: 15px;
     line-height: 1.6;
-    background: #111827;
-    color: #fff;
 }
 
 h1 {
@@ -44,9 +52,22 @@ p {
     margin: 1rem 0 1rem 0;
 }
 
+ul {
+    list-style: none;
+    margin-block: 0 !important;
+    padding-inline: 0 !important;
+}
+
 .content {
     min-height: 100vh;
     padding: 1rem;
+    color: var(--color-dark);
+    background-color: var(--background-color-dark);
+}
+
+.content.light {
+    color: var(--color);
+    background-color: var(--background-color);
 }
 
 .content-grid,
@@ -65,8 +86,29 @@ p {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: #1e293b;
     padding: 1rem;
+    background-color: var(--accent-color-dark);
+}
+
+.content.light .sidebar {
+    background-color: var(--accent-color);
+}
+
+a {
+    text-decoration: none;
+    color: #0ea5e9 !important;
+}
+
+a:visited {
+    color: #0ea5e9 !important;
+}
+
+a:hover {
+    color: #185d7d !important;
+}
+
+.sidebar li {
+    cursor: pointer;
 }
 
 .site-title {
@@ -103,12 +145,14 @@ select {
     outline: none;
     border: none;
     background-color: transparent;
-    padding: 1rem 1rem;
+    padding: 10px 10px;
     font-size: 1rem;
     border-radius: 0.25rem;
     border: 1px solid #232d3f;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin: 1rem 0 1rem 0;
+    margin: 0.2rem 0 1rem 0;
+    background-color: #ffffff;
+    color: #2d3748;
 }
 
 /* Hover effect */
@@ -131,11 +175,6 @@ select::after {
     transform: translateY(-50%);
     pointer-events: none;
     color: #4a5568;
-}
-
-.light-select {
-    background-color: #ffffff;
-    color: #2d3748;
 }
 
 .select-area {
@@ -165,6 +204,21 @@ select::after {
 
 .legend-label {
     font-size: 14px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-block: 1rem;
+    padding: 2px;
+    height: 100%;
+}
+
+.options ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 .if-mobile {
