@@ -11,7 +11,6 @@ A live version can be viewed [here](https://tornadovisualizer.vercel.app/)
 -   **Interactive Map:** Explore tornado tracks on an interactive map powered by Leaflet.
 -   **Filter by State and Year:** Filter tornado events based on the selected state and year to focus on specific regions and timeframes.
 -   **Legend:** A legend displays the Enhanced Fujita (EF) ratings, allowing users to understand the severity of tornadoes based on the color-coded legend.
--   **Responsive Design:** While the application is optimized for desktop users, a message is displayed for mobile users to inform them about the desktop-centric nature of TornadoTrax.
 
 ## Technologies Used
 
