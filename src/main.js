@@ -1,8 +1,12 @@
 import { createApp } from 'vue';
 import './style.css';
 import App from './App.vue';
-import { createPinia } from 'pinia';
 
-const pinia = createPinia();
+import { OhVueIcon, addIcons } from 'oh-vue-icons';
+import { GiTornado } from 'oh-vue-icons/icons';
 
-createApp(App).use(pinia).mount('#app');
+addIcons(GiTornado);
+
+const app = createApp(App);
+app.component('v-icon', OhVueIcon);
+app.mount('#app');

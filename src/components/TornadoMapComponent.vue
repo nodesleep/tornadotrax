@@ -1,9 +1,9 @@
 <template>
-    <div ref="mapContainer" class="h-full w-full"></div>
+    <div ref="mapContainer" class="map-component"></div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, defineProps } from 'vue';
+import { ref, watchEffect, onMounted } from 'vue';
 import states from '../data/states.json';
 import L from 'leaflet';
 
@@ -15,12 +15,6 @@ const stateCenters = states;
 
 onMounted(() => {
     initializeMap();
-});
-
-watch([selectedState, tornadoTracks], () => {
-    if (mapContainer.value) {
-        initializeMap();
-    }
 });
 
 const initializeMap = () => {
@@ -87,12 +81,12 @@ const renderTornadoTracks = (map, tracks) => {
 const getMagnitudeColor = (magnitude) => {
     // Use a color gradient from cool to warm based on magnitude
     const colorGradient = [
-        '#A0A0A0', // EF0
-        '#00BCD4', // EF1
-        '#FFEB3B', // EF2
-        '#FF5722', // EF3
-        '#FF0000', // EF4
-        '#FF4081', // EF5
+        '#94a3b8', // EF0
+        '#0ea5e9', // EF1
+        '#fcd34d', // EF2
+        '#ea580c', // EF3
+        '#dc2626', // EF4
+        '#c026d3', // EF5
     ];
 
     // Map magnitude (0 to 5) to index in color gradient array
@@ -104,6 +98,6 @@ const getMagnitudeColor = (magnitude) => {
 
 const getStateCenter = (state) => {
     // Lookup center coordinates based on the selected state
-    return stateCenters[state] || [0, 0]; // Default to center if state not found
+    return stateCenters[state] || [0, 0];
 };
 </script>
