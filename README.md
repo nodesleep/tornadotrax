@@ -16,7 +16,7 @@ A live version can be viewed [here](https://tornadotrax.vercel.app/)
 
 -   **Vue.js:** The frontend is built using Vue.js, a progressive JavaScript framework.
 -   **Leaflet:** The Leaflet library is used for creating interactive maps.
--   **JSON Data:** Tornado data is sourced from a JSON file included in the project.
+-   **JSON Data:** Tornado data is sourced from a JSON file included in the project. The data came directly from the Storm Prediction Center, found [here](https://www.spc.noaa.gov/gis/svrgis/)
 
 ## Project Structure
 
@@ -24,6 +24,14 @@ The project consists of two main components:
 
 1. **App.vue:** The main Vue.js component that handles the user interface, state management, and data filtering.
 2. **TornadoMapComponent.vue:** A reusable Vue.js component responsible for rendering the Leaflet map and displaying tornado tracks.
+
+## Future Plans
+
+The idea behind this application is to find meaningful ways of displaying data in an interactive way. Being able to see tornado paths on a map of a state in a given year is pretty neat, but there's a lot of extrapolation that could make the app more robust.
+
+1. In a future release, TornadoTrax will include some form of Time Series Analysis, which will implement charts to display the frequency of tornadoes over time, average magnitudes per year, and changes in injuries/fatalities or economic losses. These are just some rough ideas. The popup that appears when clicking on a tornado path provides a cursory view of this information, but different structuring methods combined with user options to filter and sort the data will make TornadoTrax a powerful tool for hobbyists and researchers alike.
+2. I'm still considering implementing Detail Cards to replace or expand upon the information popup a user sees when clicking on a tornado path. I'd like to include some additional information like notable events or communities affected, etc.. Some other ideas spawn from this one, such as organizing notable weather events into clusters and incorporating that into the map/chart/data presentation.
+3. As more ideas emerge, I'll place them here. Feel free to contact me if there's a specific feature you'd like to see. Better yet, fork!
 
 ## Getting Started
 
