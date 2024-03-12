@@ -32,6 +32,7 @@ The idea behind this application is to find meaningful ways of displaying data i
 1. In a future release, TornadoTrax will include some form of Time Series Analysis, which will implement charts to display the frequency of tornadoes over time, average magnitudes per year, and changes in injuries/fatalities or economic losses. These are just some rough ideas. The popup that appears when clicking on a tornado path provides a cursory view of this information, but different structuring methods combined with user options to filter and sort the data will make TornadoTrax a powerful tool for hobbyists and researchers alike.
 2. I'm still considering implementing Detail Cards to replace or expand upon the information popup a user sees when clicking on a tornado path. I'd like to include some additional information like notable events or communities affected, etc.. Some other ideas spawn from this one, such as organizing notable weather events into clusters and incorporating that into the map/chart/data presentation.
 3. As more ideas emerge, I'll place them here. Feel free to contact me if there's a specific feature you'd like to see. Better yet, fork!
+4. An API is being developed to improve the capabilities and filtering of data without putting all of the burden on the client. It can be viewed [here](https://github.com/themattbook/tornadotrax-api)
 
 ## Getting Started
 
