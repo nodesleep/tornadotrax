@@ -195,6 +195,7 @@ select::after {
 .select-area {
 	display: flex;
 	flex-direction: column;
+	margin-block: 0.3rem;
 }
 
 .legend {

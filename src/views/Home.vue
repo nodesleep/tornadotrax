@@ -23,7 +23,7 @@
 				</p>
 				<div class="select-area">
 					<label for="stateDropdown"
-						>(Optional) Select State(s):</label
+						>Select one or more states: (optional)</label
 					>
 					<select
 						class="light-select"
@@ -58,6 +58,25 @@
 						class="light-select"
 					/>
 				</div>
+				<div class="select-area">
+					<label for="magRating">EF Rating: (optional)</label>
+					<select
+						name="magRatingSelect"
+						id="magRating"
+						class="light-select"
+						v-model="magRating"
+					>
+						<option value="" disabled selected>
+							Select EF Rating
+						</option>
+						<option value="0">EF0</option>
+						<option value="1">EF1</option>
+						<option value="2">EF2</option>
+						<option value="3">EF3</option>
+						<option value="4">EF4</option>
+						<option value="5">EF5</option>
+					</select>
+				</div>
 				<button @click="fetchData">Submit</button>
 				<div class="options">
 					<div class="legend">
@@ -85,6 +104,10 @@
 						map.
 					</p>
 					<p class="note">
+						Tornadoes are plotted based on their state of origin,
+						irrespective of the states they should travel into.
+					</p>
+					<p class="note">
 						TornadoTrax is an open source project under the GPL-3.0
 						license.
 						<a
@@ -110,7 +133,9 @@
 				</div>
 			</section>
 			<section class="tornado-map-area">
-				<p v-if="!mapReady">Please select a state to continue...</p>
+				<p v-if="!mapReady">
+					Map will render once a query has been submitted...
+				</p>
 				<TornadoMapComponent
 					:selectedState="selectedStates.join(',')"
 					:tornadoTracks="tornadoTracks"
@@ -132,6 +157,7 @@ const isLightMode = ref(false);
 const selectedStates = ref([]);
 const startDate = ref('');
 const endDate = ref('');
+const magRating = ref('');
 const tornadoTracks = ref([]);
 const mapReady = ref(false);
 
@@ -150,6 +176,7 @@ const fetchData = async () => {
 			...(statesQuery && { state: statesQuery }),
 			startDate: startDate.value,
 			endDate: endDate.value,
+			mag: magRating.value,
 		}).toString();
 
 		try {
