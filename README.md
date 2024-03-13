@@ -22,8 +22,9 @@ A live version can be viewed [here](https://tornadotrax.vercel.app/)
 
 The project consists of two main components:
 
-1. **App.vue:** The main Vue.js component that handles the user interface, state management, and data filtering.
+1. **Home.vue:** The main Vue.js view that handles the user interface, state management, and data filtering.
 2. **TornadoMapComponent.vue:** A reusable Vue.js component responsible for rendering the Leaflet map and displaying tornado tracks.
+3. **Advanced.vue** A view created for later features supporting charts and research-oriented data models.
 
 ## Future Plans
 
