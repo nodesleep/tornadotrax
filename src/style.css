@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 :root {
 	--background-color-dark: #111827;
 	--accent-color-dark: #1e293b;
@@ -18,7 +18,7 @@
 }
 
 body {
-	font-family: 'Fira Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 15px;
 	line-height: 1.6;
 }
@@ -56,6 +56,20 @@ ul {
 	list-style: none;
 	margin-block: 0 !important;
 	padding-inline: 0 !important;
+}
+
+button {
+	width: 50%;
+	margin-block: 1rem;
+	padding: 10px;
+	background-color: #d6d6d6;
+	color: #020617;
+	border: none;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #afafaf;
 }
 
 .content {
@@ -136,6 +150,7 @@ a:hover {
 
 .note {
 	font-size: 0.8rem;
+	bottom: 0;
 }
 
 select {
@@ -180,7 +195,6 @@ select::after {
 .select-area {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
 }
 
 .legend {
@@ -203,7 +217,7 @@ select::after {
 }
 
 .legend-label {
-	font-size: 14px;
+	font-size: 13px;
 }
 
 .options {

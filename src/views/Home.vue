@@ -22,7 +22,9 @@
 					1950-2022*
 				</p>
 				<div class="select-area">
-					<label for="stateDropdown">Select State(s):</label>
+					<label for="stateDropdown"
+						>(Optional) Select State(s):</label
+					>
 					<select
 						class="light-select"
 						id="stateDropdown"
@@ -57,50 +59,55 @@
 					/>
 				</div>
 				<button @click="fetchData">Submit</button>
-				<div class="legend">
-					<div
-						v-for="(count, rating) in efRatingCounts"
-						:key="rating"
-						class="legend-item"
-					>
+				<div class="options">
+					<div class="legend">
 						<div
-							class="legend-color"
-							:style="{
-								background: getMagnitudeColor(Number(rating)),
-							}"
-						></div>
-						<div class="legend-label">EF{{ rating }}</div>
+							v-for="(count, rating) in efRatingCounts"
+							:key="rating"
+							class="legend-item"
+						>
+							<div
+								class="legend-color"
+								:style="{
+									background: getMagnitudeColor(
+										Number(rating),
+									),
+								}"
+							></div>
+							<div class="legend-label">EF{{ rating }}</div>
+						</div>
 					</div>
+					<p class="note">
+						<strong>*Disclaimer:</strong> Some tornado records do
+						not have an end coordinate and therefore have been
+						omitted. Tornadoes with an unknown rating are also
+						omitted. These outliers don't render correctly in the
+						map.
+					</p>
+					<p class="note">
+						TornadoTrax is an open source project under the GPL-3.0
+						license.
+						<a
+							href="https://github.com/themattbook/tornadotrax"
+							target="_blank"
+							>View it on Github</a
+						>
+					</p>
+					<ul>
+						<li @click="toggleDarkMode">
+							<v-icon
+								name="ri-sun-fill"
+								scale="1"
+								v-if="!isLightMode"
+							/>
+							<v-icon
+								name="ri-moon-fill"
+								scale="1"
+								v-if="isLightMode"
+							/>
+						</li>
+					</ul>
 				</div>
-				<ul>
-					<li @click="toggleDarkMode">
-						<v-icon
-							name="ri-sun-fill"
-							scale="1"
-							v-if="!isLightMode"
-						/>
-						<v-icon
-							name="ri-moon-fill"
-							scale="1"
-							v-if="isLightMode"
-						/>
-					</li>
-				</ul>
-				<p class="note">
-					<strong>*Disclaimer:</strong> Some tornado records do not
-					have an end coordinate and therefore have been omitted.
-					Tornadoes with an unknown rating are also omitted. These
-					outliers don't render correctly in the map.
-				</p>
-				<p class="note">
-					TornadoTrax is an open source project under the GPL-3.0
-					license.
-					<a
-						href="https://github.com/themattbook/tornadotrax"
-						target="_blank"
-						>View it on Github</a
-					>
-				</p>
 			</section>
 			<section class="tornado-map-area">
 				<p v-if="!mapReady">Please select a state to continue...</p>
