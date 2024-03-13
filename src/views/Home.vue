@@ -159,7 +159,10 @@ const fetchData = async () => {
 			);
 			if (response.ok) {
 				const { data } = await response.json();
-				tornadoTracks.value = data.map((track) => ({
+				const filteredData = data.filter(
+					(track) => track.elat != '0.0' && track.elon !== '0.0',
+				);
+				tornadoTracks.value = filteredData.map((track) => ({
 					...track,
 					mag: parseFloat(track.mag),
 					fat: parseFloat(track.fat),

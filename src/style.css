@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 :root {
-	--background-color-dark: #111827;
-	--accent-color-dark: #1e293b;
+	--background-color-dark: #0a0a0a;
+	--accent-color-dark: #171717;
 	--color-dark: #fff;
 
-	--background-color: #f8fafc;
-	--accent-color: #e2e8f0;
+	--background-color: #fafafa;
+	--accent-color: #e5e5e5;
 	--color: #020617;
 }
 
@@ -136,7 +136,7 @@ a:hover {
 	justify-content: center;
 	height: calc(100vh - 2rem);
 	width: 100%;
-	border: 1px solid #232d3f;
+	border: 1px solid var(--background-color-dark);
 }
 
 .tornado-map-area p {
