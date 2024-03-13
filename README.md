@@ -4,7 +4,7 @@ TornadoTrax is a web application that serves as a visual archive and path tracke
 
 A live version can be viewed [here](https://tornadotrax.vercel.app/)
 
-![image](https://github.com/themattbook/tornadotrax/blob/main/public/product-screen.png?raw=true)
+![image](https://github.com/themattbook/tornadotrax/blob/feature/integrate-new-api/public/product-screen.png?raw=true)
 
 ## Features
 
