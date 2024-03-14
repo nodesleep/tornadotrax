@@ -180,9 +180,11 @@ const fetchData = async () => {
 		}).toString();
 
 		try {
-			console.log(`http://localhost:3000/tornado?${queryParams}`);
+			console.log(
+				`${import.meta.env.VITE_APP_BASE_API}/tornado?${queryParams}`,
+			);
 			const response = await fetch(
-				`http://localhost:3000/tornado?${queryParams}`,
+				`${import.meta.env.VITE_APP_BASE_API}/tornado?${queryParams}`,
 			);
 			if (response.ok) {
 				const { data } = await response.json();
