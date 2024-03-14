@@ -14,7 +14,8 @@
         "leaflet": "^1.9.4",
         "oh-vue-icons": "^1.0.0-rc3",
         "vue": "^3.3.8",
-        "vue-chartjs": "^5.2.0"
+        "vue-chartjs": "^5.2.0",
+        "vue-router": "^4.3.0"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.5.0",
