@@ -66,9 +66,7 @@
 						class="light-select"
 						v-model="magRating"
 					>
-						<option value="" disabled selected>
-							Select EF Rating
-						</option>
+						<option value="" selected>None</option>
 						<option value="0">EF0</option>
 						<option value="1">EF1</option>
 						<option value="2">EF2</option>
