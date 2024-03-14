@@ -178,9 +178,6 @@ const fetchData = async () => {
 		}).toString();
 
 		try {
-			console.log(
-				`${import.meta.env.VITE_APP_BASE_API}/tornado?${queryParams}`,
-			);
 			const response = await fetch(
 				`${import.meta.env.VITE_APP_BASE_API}/tornado?${queryParams}`,
 			);
