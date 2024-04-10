@@ -65,14 +65,14 @@ const renderTornadoTracks = (map, tracks) => {
 			weight: 4,
 		}).addTo(tracksLayer);
 		polyline.bindPopup(`<div>
-    <strong>Tornado #${track.om}</strong><br>
-    Rating: EF${track.mag}<br>
-    Date: ${track.date} at ${track.time}<br>
-    Fatalities: ${track.fat}<br>
-    Injuries: ${track.inj}<br>
-    Distance: ${track.len} mi.<br>
-    Max Width: ${track.wid} yds.
-</div>
+			<strong>Tornado #${track.om}</strong><br>
+			Rating: EF${track.mag}<br>
+			Date: ${track.date} at ${track.time}<br>
+			Fatalities: ${track.fat}<br>
+			Injuries: ${track.inj}<br>
+			Distance: ${track.len} mi.<br>
+			Max Width: ${track.wid} yds.
+		</div>
 `);
 	});
 
