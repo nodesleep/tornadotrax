@@ -170,21 +170,29 @@ const fetchData = async () => {
 	mapReady.value = false;
 	if (startDate.value && endDate.value) {
 		const statesQuery = selectedStates.value.join(',');
-		const queryParams = new URLSearchParams({
+		const requestBody = {
 			...(statesQuery && { state: statesQuery }),
 			startDate: startDate.value,
 			endDate: endDate.value,
 			mag: magRating.value,
-		}).toString();
+		};
 
 		try {
 			const response = await fetch(
-				`${import.meta.env.VITE_APP_BASE_API}/tornado?${queryParams}`,
+				`${import.meta.env.VITE_APP_BASE_API}/tornado`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(requestBody),
+				},
 			);
+
 			if (response.ok) {
 				const { data } = await response.json();
 				const filteredData = data.filter(
-					(track) => track.elat != '0.0' && track.elon !== '0.0',
+					(track) => track.elat !== '0.0' && track.elon !== '0.0',
 				);
 				tornadoTracks.value = filteredData.map((track) => ({
 					...track,
