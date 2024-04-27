@@ -59,12 +59,13 @@
 					/>
 				</div>
 				<div class="select-area">
-					<label for="magRating">EF Rating: (optional)</label>
+					<label for="magRating">EF Rating(s): (optional)</label>
 					<select
 						name="magRatingSelect"
 						id="magRating"
 						class="light-select"
 						v-model="magRating"
+						multiple
 					>
 						<option value="" selected>None</option>
 						<option value="0">EF0</option>
@@ -153,9 +154,9 @@ import TornadoMapComponent from '../components/TornadoMapComponent.vue';
 
 const isLightMode = ref(false);
 const selectedStates = ref([]);
-const startDate = ref('');
-const endDate = ref('');
-const magRating = ref('');
+const startDate = ref('2018-01-01');
+const endDate = ref('2022-12-31');
+const magRating = ref([]);
 const tornadoTracks = ref([]);
 const mapReady = ref(false);
 
@@ -170,11 +171,12 @@ const fetchData = async () => {
 	mapReady.value = false;
 	if (startDate.value && endDate.value) {
 		const statesQuery = selectedStates.value.join(',');
+		const magQuery = magRating.value.join(',');
 		const requestBody = {
 			...(statesQuery && { state: statesQuery }),
+			...(magQuery && { mag: magQuery }),
 			startDate: startDate.value,
 			endDate: endDate.value,
-			mag: magRating.value,
 		};
 
 		try {
