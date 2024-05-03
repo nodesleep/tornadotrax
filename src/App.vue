@@ -379,9 +379,6 @@ const clearFilters = () => {
 					<CircleStackIcon
 						class="size-10 text-cyan-600 animate-pulse"
 					/>
-					<p class="font-bold dark:text-gray-300">
-						Querying Database
-					</p>
 				</div>
 				<div
 					class="flex items-center justify-center h-full w-full absolute z-10"
