@@ -72,7 +72,7 @@ const fetchData = async () => {
 
 		try {
 			const response = await fetch(
-				`${import.meta.env.VITE_APP_BASE_API}tornado`,
+				`${import.meta.env.VITE_APP_BASE_API}/tornado`,
 				{
 					method: 'POST',
 					headers: {

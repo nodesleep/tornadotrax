@@ -16,7 +16,7 @@ export default function loginClient() {
 
 	// Return the fetch Promise chain
 	return fetch(
-		`${import.meta.env.VITE_APP_BASE_API}auth/login`,
+		`${import.meta.env.VITE_APP_BASE_API}/auth/login`,
 		requestOptions,
 	)
 		.then((response) => response.json())
