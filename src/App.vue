@@ -1,5 +1,6 @@
 <script setup>
-import { ref, watchEffect, computed } from 'vue';
+import { ref, watchEffect, computed, onMounted } from 'vue';
+import loginClient from './auth/auth.js';
 import RatingLegend from './components/RatingLegend.vue';
 import TornadoMapComponent from './components/TornadoMapComponent.vue';
 import states from './data/states.json';
@@ -13,6 +14,9 @@ import {
 	ChevronUpIcon,
 	Cog6ToothIcon,
 } from '@heroicons/vue/24/outline';
+
+// JWT
+const bearerToken = ref('');
 
 // Visibility Toggles for Sidebar
 const dateVisible = ref(false);
@@ -68,11 +72,12 @@ const fetchData = async () => {
 
 		try {
 			const response = await fetch(
-				`${import.meta.env.VITE_APP_BASE_API}/tornado`,
+				`${import.meta.env.VITE_APP_BASE_API}tornado`,
 				{
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						Authorization: `Bearer ${bearerToken.value}`,
 					},
 					body: JSON.stringify(requestBody),
 				},
@@ -118,6 +123,15 @@ const clearFilters = () => {
 	tornadoTracks.value = [];
 	mapReady.value = false;
 };
+
+// Handle Login
+onMounted(async () => {
+	try {
+		bearerToken.value = await loginClient();
+	} catch (error) {
+		console.error('Error while logging in:', error);
+	}
+});
 </script>
 
 <template>
