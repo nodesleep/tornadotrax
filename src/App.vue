@@ -1,6 +1,5 @@
 <script setup>
-import { ref, watchEffect, computed, onMounted } from 'vue';
-import loginClient from './auth/auth.js';
+import { ref, watchEffect, computed } from 'vue';
 import RatingLegend from './components/RatingLegend.vue';
 import TornadoMapComponent from './components/TornadoMapComponent.vue';
 import states from './data/states.json';
@@ -14,9 +13,7 @@ import {
 	ChevronUpIcon,
 	Cog6ToothIcon,
 } from '@heroicons/vue/24/outline';
-
-// JWT
-const bearerToken = ref('');
+import TornadoAnalyticsComponent from './components/TornadoAnalyticsComponent.vue';
 
 // Visibility Toggles for Sidebar
 const dateVisible = ref(false);
@@ -34,6 +31,7 @@ const endDate = ref('2022-12-31');
 const selectedStates = ref([]);
 const magRating = ref([]);
 const tornadoTracks = ref([]);
+const analyticsData = ref([]);
 
 // Loading and Map Ready
 const isLoading = ref(false);
@@ -72,12 +70,11 @@ const fetchData = async () => {
 
 		try {
 			const response = await fetch(
-				`${import.meta.env.VITE_APP_BASE_API}/tornado`,
+				`${import.meta.env.VITE_APP_BASE_API}tornado`,
 				{
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: `Bearer ${bearerToken.value}`,
 					},
 					body: JSON.stringify(requestBody),
 				},
@@ -85,6 +82,7 @@ const fetchData = async () => {
 
 			if (response.ok) {
 				const { data } = await response.json();
+				analyticsData.value = data;
 				const filteredData = data.filter(
 					(track) => track.elat !== '0.0' && track.elon !== '0.0',
 				);
@@ -123,15 +121,6 @@ const clearFilters = () => {
 	tornadoTracks.value = [];
 	mapReady.value = false;
 };
-
-// Handle Login
-onMounted(async () => {
-	try {
-		bearerToken.value = await loginClient();
-	} catch (error) {
-		console.error('Error while logging in:', error);
-	}
-});
 </script>
 
 <template>
@@ -381,10 +370,16 @@ onMounted(async () => {
 				class="flex-1 flex flex-col h-screen items-center justify-center bg-gray-300 dark:bg-gray-700 relative"
 			>
 				<div
-					class="absolute bottom-0 left-0 p-4 z-20"
+					class="absolute bottom-0 left-0 p-3 z-20"
 					v-if="showLegend"
 				>
 					<RatingLegend />
+				</div>
+				<div
+					class="absolute bottom-0 right-50 p-3 z-20"
+					v-if="mapReady"
+				>
+					<TornadoAnalyticsComponent :data="analyticsData" />
 				</div>
 				<div
 					class="flex flex-col items-center justify-center"
