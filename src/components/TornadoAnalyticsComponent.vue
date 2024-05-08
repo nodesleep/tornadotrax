@@ -63,14 +63,14 @@ const countByMagnitude = computed(() => {
 	<div
 		class="bg-white shadow-xl dark:bg-gray-800 dark:text-white text-center p-4 rounded-xl"
 	>
-		<div class="grid grid-cols-12 gap-2">
+		<div class="grid grid-flow-col auto-cols-max gap-6">
 			<div class="col-1">
 				<h1
 					class="text-xs text-cyan-700 dark:text-cyan-500 font-medium"
 				>
 					Total Events
 				</h1>
-				<h1 class="text-xl font-bold">
+				<h1 class="text-lg font-bold">
 					{{ tornadoCount }}
 				</h1>
 			</div>
@@ -80,7 +80,7 @@ const countByMagnitude = computed(() => {
 				>
 					States
 				</h1>
-				<h1 class="text-xl font-bold">
+				<h1 class="text-lg font-bold">
 					{{ uniqueStatesCount }}
 				</h1>
 			</div>
@@ -90,7 +90,7 @@ const countByMagnitude = computed(() => {
 				>
 					Violent Tor
 				</h1>
-				<h1 class="text-xl font-bold">
+				<h1 class="text-lg font-bold">
 					{{ violentTornadoesCount }}
 				</h1>
 			</div>
@@ -100,7 +100,7 @@ const countByMagnitude = computed(() => {
 				>
 					Fatalities
 				</h1>
-				<h1 class="text-xl font-bold">
+				<h1 class="text-lg font-bold">
 					{{ totalFatalities }}
 				</h1>
 			</div>
@@ -110,7 +110,7 @@ const countByMagnitude = computed(() => {
 				>
 					Injuries
 				</h1>
-				<h1 class="text-xl font-bold">
+				<h1 class="text-lg font-bold">
 					{{ totalInjuries }}
 				</h1>
 			</div>
@@ -120,7 +120,7 @@ const countByMagnitude = computed(() => {
 				>
 					Cost
 				</h1>
-				<h1 class="text-xl font-bold">
+				<h1 class="text-lg font-bold">
 					{{ totalDamageCost }}
 				</h1>
 			</div>
@@ -134,7 +134,7 @@ const countByMagnitude = computed(() => {
 				>
 					EF{{ mag }}
 				</h1>
-				<h1 class="text-xl font-bold">
+				<h1 class="text-lg font-bold">
 					{{ count }}
 				</h1>
 			</div>
