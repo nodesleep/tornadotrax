@@ -44,7 +44,7 @@ To run TornadoTrax locally, follow these steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/themattbook/TornadoTrax.git
+    git clone https://github.com/nodesleep/TornadoTrax.git
     ```
 
 2. Navigate to the project directory:
