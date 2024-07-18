@@ -2,7 +2,7 @@
 
 TornadoTrax is a web application that serves as a visual archive and path tracker for every documented tornado in the United States from 1950 to 2022. This project provides users with an interactive map displaying tornado tracks, along with essential information such as tornado ratings, date and time, fatalities, injuries, distance, and maximum width.
 
-A live version can be viewed [here](https://tornadotrax.vercel.app/)
+A live version can be viewed [here](https://tornadotrax.com)
 
 ![image](https://raw.githubusercontent.com/nodesleep/tornadotrax/main/public/product_screen.png)
 
