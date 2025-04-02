@@ -279,6 +279,7 @@ import { ref, computed, onMounted, reactive } from "vue";
 import { useTornadoStore } from "../stores/tornadoStore";
 import { MAGNITUDE_SCALE, STATE_OPTIONS } from "../types/tornado";
 import type { TornadoQueryParams } from "../types/tornado";
+// @ts-ignore
 import TornadoMap from "../components/map/TornadoMap.vue";
 
 const tornadoStore = useTornadoStore();
