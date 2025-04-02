@@ -1,94 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>TornadoTrax</title>
-		<meta name="title" content="TornadoTrax | Tornado Damage Tracking" />
-		<meta
-			name="description"
-			content="Explore the path of every tornado from 1950 to 2022 with TornadoTrax. Dive into our interactive map to discover the intensity and trajectory of tornadoes across the US. Start your journey through history now and uncover the stories behind the storms."
-		/>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TornadoTrax - Advanced Tornado Research & Analysis</title>
 
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://tornadotrax.vercel.app" />
-		<meta
-			property="og:title"
-			content="TornadoTrax | Tornado Damage Tracking"
-		/>
-		<meta
-			property="og:description"
-			content="Explore the path of every tornado from 1950 to 2022 with TornadoTrax. Dive into our interactive map to discover the intensity and trajectory of tornadoes across the US. Start your journey through history now and uncover the stories behind the storms."
-		/>
-		<meta
-			property="og:image"
-			content="https://tornadotrax.vercel.app/meta_image.png"
-		/>
+    <!-- Primary Meta Tags -->
+    <meta
+      name="title"
+      content="TornadoTrax - Advanced Tornado Research & Analysis"
+    />
+    <meta
+      name="description"
+      content="Professional tornado data visualization and analysis tool for researchers and weather enthusiasts"
+    />
+    <meta
+      name="keywords"
+      content="tornado data, weather research, storm analysis, meteorology, tornado visualization"
+    />
+    <meta name="author" content="TornadoTrax" />
 
-		<!-- Twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content="https://tornadotrax.vercel.app" />
-		<meta
-			name="twitter:title"
-			content="TornadoTrax | Tornado Damage Tracking"
-		/>
-		<meta
-			name="twitter:description"
-			content="Explore the path of every tornado from 1950 to 2022 with TornadoTrax. Dive into our interactive map to discover the intensity and trajectory of tornadoes across the US. Start your journey through history now and uncover the stories behind the storms."
-		/>
-		<meta
-			name="twitter:image"
-			content="https://tornadotrax.vercel.app/meta_image.png"
-		/>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tornadotrax.com/" />
+    <meta
+      property="og:title"
+      content="TornadoTrax - Advanced Tornado Research & Analysis"
+    />
+    <meta
+      property="og:description"
+      content="Professional tornado data visualization and analysis tool for researchers and weather enthusiasts"
+    />
+    <meta property="og:image" content="/og-image.png" />
 
-		<link
-			rel="stylesheet"
-			href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-			integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-			crossorigin=""
-		/>
-		<!-- Make sure you put this AFTER Leaflet's CSS -->
-		<script
-			src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-			integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-			crossorigin=""
-		></script>
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="/favicon-16x16.png"
-		/>
-		<link rel="manifest" href="/site.webmanifest" />
-		<!-- Google tag (gtag.js) -->
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=G-SCSD1XECQD"
-		></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag("js", new Date());
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://tornadotrax.com/" />
+    <meta
+      property="twitter:title"
+      content="TornadoTrax - Advanced Tornado Research & Analysis"
+    />
+    <meta
+      property="twitter:description"
+      content="Professional tornado data visualization and analysis tool for researchers and weather enthusiasts"
+    />
+    <meta property="twitter:image" content="/og-image.png" />
 
-			gtag("config", "G-SCSD1XECQD");
-		</script>
-	</head>
-	<body>
-		<div id="app"></div>
-		<script type="module" src="/src/main.js"></script>
-	</body>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <!-- Theme Color for browser UI -->
+    <meta name="theme-color" content="#ea580c" />
+  </head>
+  <body class="bg-white text-primary-900 min-h-screen">
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
