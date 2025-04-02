@@ -7,11 +7,34 @@ import type {
 
 // Create axios instance with base URL and default config
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
+  baseURL: import.meta.env.VITE_API_URL || "/api",
   headers: {
     "Content-Type": "application/json",
   },
 });
+
+// Log which API URL is being used (only in development)
+if (import.meta.env.DEV) {
+  console.log(`API URL: ${apiClient.defaults.baseURL}`);
+}
+
+// Add request interceptor for cross-environment handling
+apiClient.interceptors.request.use((config) => {
+  // You can add environment-specific logic here if needed
+  return config;
+});
+
+// Add response interceptor for error handling
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Handle different errors based on environment
+    if (import.meta.env.DEV) {
+      console.error("API Error:", error);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const tornadoApi = {
   /**
