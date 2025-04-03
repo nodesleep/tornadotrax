@@ -124,39 +124,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, reactive } from "vue";
-
-// Form state
-const form = reactive({
-  email: "",
-  subject: "",
-  message: "",
-});
-
-const isSubmitting = ref(false);
-const formSubmitted = ref(false);
-
-// Submit form handler
-function submitForm() {
-  isSubmitting.value = true;
-
-  // Simulate API call
-  setTimeout(() => {
-    // Reset form
-    form.email = "";
-    form.subject = "";
-    form.message = "";
-
-    // Show success message
-    formSubmitted.value = true;
-    isSubmitting.value = false;
-
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      formSubmitted.value = false;
-    }, 5000);
-  }, 1500);
-}
-</script>
